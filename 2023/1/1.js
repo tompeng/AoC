@@ -5,6 +5,30 @@ const decode = (s) => {
 
 const run = (list) => list.map(decode).reduce((sum, num) => sum + num, 0);
 
+const decode2 = (s) => {
+  const english = [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+  ];
+  const toNumber = (i) =>
+    english.indexOf(i) === -1 ? Number(i) : english.indexOf(i) + 1;
+
+  const digit = `[0-9]|${english.join("|")}`;
+  const firstDigit = (new RegExp(`(${digit}).*$`)).exec(s)[1];
+  const lastDigit = (new RegExp(`^(?:.*)(${digit})`)).exec(s)[1];
+
+  return Number(`${toNumber(firstDigit)}${toNumber(lastDigit)}`);
+};
+
+const run2 = (list) => list.map(decode2).reduce((sum, num) => sum + num, 0);
+
 const inputs = [
   "threehqv2",
   "sxoneightoneckk9ldctxxnffqnzmjqvj",
@@ -1008,4 +1032,4 @@ const inputs = [
   "26fmrrhhpthree6b",
 ];
 
-console.log(run(inputs));
+console.log(run(inputs))
