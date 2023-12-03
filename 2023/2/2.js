@@ -31,6 +31,14 @@ const checkLine = (line) => {
   return true;
 };
 
+const getPower = (line) => {
+  let power = 1;
+  for (color in LIMIT) {
+    power *= findColorMax(line, color);
+  }
+  return power;
+};
+
 async function processLineByLine() {
   const fileStream = fs.createReadStream("./2023/2/input.txt");
 
@@ -41,19 +49,23 @@ async function processLineByLine() {
   // Note: we use the crlfDelay option to recognize all instances of CR LF
   // ('\r\n') in input.txt as a single line break.
 
-  let lineNum = 0;
-  let total = 0;
+  let gameIndex = 0;
+  let totalGameIndex = 0;
+  let totalPower = 0;
   for await (const line of rl) {
-    lineNum++;
+    gameIndex++;
 
     // Each line in input.txt will be successively available here as `line`.
     if (checkLine(line)) {
-      console.log(line);
-      total += lineNum;
+      // console.log(line);
+      totalGameIndex += gameIndex;
     }
+
+    totalPower += getPower(line);
   }
 
-  console.log(total);
+  console.log(totalGameIndex);
+  console.log(totalPower);
 }
 
 processLineByLine();
