@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "2023.3": "tsx 2023/3/3"
+    "2023": "tsx 2023/4/4"
   },
   "keywords": [],
   "author": "",
