@@ -24,13 +24,15 @@ for (const [rowI, row] of data.entries()) {
   }
 }
 
+const multiplier = 1_000_000 - 1;
+
 const getSteps = (from: Location, to: Location) => {
   const fromRow = Math.min(from[0], to[0]);
   const toRow = Math.max(from[0], to[0]);
   const emptyRowsCount = rowIsEmpty
     .slice(fromRow, toRow)
     .filter(Boolean).length;
-  const rowDiff = toRow - fromRow + emptyRowsCount;
+  const rowDiff = toRow - fromRow + emptyRowsCount * multiplier;
   //   console.log({
   //     fromRow,
   //     toRow,
@@ -41,7 +43,7 @@ const getSteps = (from: Location, to: Location) => {
   const fromCol = Math.min(from[1], to[1]);
   const toCol = Math.max(from[1], to[1]);
   const emptyColCount = colIsEmpty.slice(fromCol, toCol).filter(Boolean).length;
-  const colDiff = toCol - fromCol + emptyColCount;
+  const colDiff = toCol - fromCol + emptyColCount * multiplier;
   //   console.log({
   //     fromCol,
   //     toCol,
